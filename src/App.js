@@ -1,7 +1,8 @@
 import Home from './components/Home';
 import Navbar from './components/Navbar';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom';
 import Blog from './Blog';
+import Create from './Create';
 
 function App() {
   
@@ -11,7 +12,8 @@ function App() {
      <div className="content">
      <Routes>
        <Route path='/' element={<Home/>}></Route>
-       <Route path='/about' element={<Blog/>}></Route>
+       <Route path='/blogs/:id' element={<Blog/>}></Route>
+       <Route path='/create' element={<Create/>}></Route>
      </Routes>
      </div>
     </div>
