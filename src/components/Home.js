@@ -4,23 +4,26 @@ import BlogList from './BlogList'
 function Home() {
 
     const [blogs, setBlogs] = useState(null)
-
-
-    const deleteBlog = (id) =>{
-        let newBlogs = blogs.filter((blog)=>{
-            return blog.id !== id
-        })
-        setBlogs(newBlogs)
-    }
-
+    const [isPending,  setisPending] = useState(true)
+    const [error, setError] = useState(null)
 
     useEffect(()=>{
         fetch("http://localhost:8000/blogs")
         .then(response => {
+            
+            if(!response.ok){
+                throw Error("Could not fetch data for that resources")
+            }
             return response.json()
         })
         .then((data)=>{
             setBlogs(data)
+            setisPending(false)
+            setError(null)
+        })
+        .catch(err =>{
+            setError(err.message);
+            setisPending(false)
         })
     }, [])
 
@@ -28,8 +31,9 @@ function Home() {
    
     return (
         <div className="home">
-          { blogs &&
-           <BlogList blogs={blogs} title="All Blogs" handleDelete={deleteBlog}/>}
+            {error && <div>{error}</div> }
+          { isPending && <div>Loading...</div> }
+          {blogs && <BlogList blogs={blogs} title="All Blogs"/>}
           
         </div>
     )
