@@ -9,7 +9,6 @@ function Home() {
             {error && <div>{error}</div> }
           { isPending && <div>Loading...</div> }
           {data && <BlogList blogs={data} title="All Blogs"/>}
-          
         </div>
     )
 }
