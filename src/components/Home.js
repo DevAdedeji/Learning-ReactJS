@@ -3,7 +3,7 @@ import useFetch from '../useFetch'
 
 
 function Home() {   
-    const {data, isPending, error} = useFetch("http://localhost:8000/blogs")
+    const {data, isPending, error} = useFetch("http://localhost:8080/blogs")
     return (
         <div className="home">
             {error && <div>{error}</div> }
